@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Портфолио 3D Artist</title>
+    <style>
+        /* Базовые настройки и темная тема */
+        :root {
+            --bg-color: #0f0f0f;
+            --text-color: #ffffff;
+            --accent-color: #00d2ff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Навигация */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(15, 15, 15, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        nav .logo span {
+            color: var(--accent-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Главный экран (Hero) */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop') center/cover;
+        }
+
+        header h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: #aaaaaa;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            background-color: var(--accent-color);
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 210, 255, 0.3);
+        }
+
+        /* Секции */
+        section {
+            padding: 100px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+        }
+
+        /* Галерея Портфолио */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+
+        .overlay span {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* Обо мне и Контакты */
+        .about-content, .contact-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.2rem;
+            border: 1px solid var(--text-color);
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent-color);
+            color: #000;
+            border-color: var(--accent-color);
+        }
+
+        /* Подвал */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: #0a0a0a;
+            color: #555;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 2.5rem;
+            }
+            section {
+                padding: 60px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Навигация -->
+    <nav>
+        <div class="logo">ART<span>3D</span></div>
+        <ul>
+            <li><a href="#home">Главная</a></li>
+            <li><a href="#portfolio">Работы</a></li>
+            <li><a href="#about">Обо мне</a></li>
+            <li><a href="#contact">Контакты</a></li>
+        </ul>
+    </nav>
+
+    <!-- Главный экран -->
+    <header id="home">
+        <h1>Привет, я [Ваше Имя]</h1>
+        <p>Профессиональный 3D-художник. Специализируюсь на создании персонажей, окружения и предметной визуализации.</p>
+        <a href="#portfolio" class="btn">Смотреть портфолио</a>
+    </header>
+
+    <!-- Портфолио -->
+    <section id="portfolio">
+        <h2 class="section-title">Мои работы</h2>
+        <div class="gallery">
+            <!-- Работа 1 -->
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=600&auto=format&fit=crop" alt="3D Render 1">
+                <div class="overlay"><span>Sci-Fi Character</span></div>
+            </div>
+            <!-- Работа 2 -->
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?q=80&w=600&auto=format&fit=crop" alt="3D Render 2">
+                <div class="overlay"><span>Cyberpunk City</span></div>
+            </div>
+            <!-- Работа 3 -->
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1616161560417-66d4aba5ce38?q=80&w=600&auto=format&fit=crop" alt="3D Render 3">
+                <div class="overlay"><span>Weapon Design</span></div>
+            </div>
+            <!-- Работа 4 -->
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1633355444132-63666f571b69?q=80&w=600&auto=format&fit=crop" alt="3D Render 4">
+                <div class="overlay"><span>Abstract Art</span></div>
+            </div>
+            <!-- Работа 5 -->
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=600&auto=format&fit=crop" alt="3D Render 5">
+                <div class="overlay"><span>Vehicle Modeling</span></div>
+            </div>
+            <!-- Работа 6 -->
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop" alt="3D Render 6">
+                <div class="overlay"><span>Interior Visualization</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Обо мне -->
+    <section id="about">
+        <h2 class="section-title">Обо мне</h2>
+        <div class="about-content">
+            <p>Я 3D-художник с более чем 5-летним опытом работы в индустрии геймдева и кино. Владею такими программами, как Blender, ZBrush, Maya, Substance Painter и Unreal Engine. Моя страсть — воплощать невероятные идеи в объемные реалистичные миры.</p>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contact">
+        <h2 class="section-title">Связаться со мной</h2>
+        <div class="contact-content">
+            <p>Открыт для новых проектов и сотрудничества. Напишите мне!</p>
+            <div class="social-links">
+                <a href="mailto:your.email@example.com">Email</a>
+                <a href="https://artstation.com/" target="_blank">ArtStation</a>
+                <a href="https://behance.net/" target="_blank">Behance</a>
+                <a href="https://instagram.com/" target="_blank">Instagram</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer>
+        <p>&copy; 2026 [Ваше Имя]. Все права защищены.</p>
+    </footer>
+
+</body>
+</html>
